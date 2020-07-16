@@ -1,0 +1,21 @@
+service: passwordless-example
+
+plugins:
+  - serverless-webpack
+
+custom:
+  webpack:
+    includeModules:
+      forceExclude:
+        - aws-sdk
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stackName: ${self:service}-${self:provider.stage}
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-1'}
+  profile: mobcastServerless
+  logs:
+    restApi: true
+  logRetentionInDays: 3

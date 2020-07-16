@@ -1,7 +1,6 @@
 {
-  "name": "amplify-test",
-  "version": "0.1.0",
-  "private": true,
+  "name": "amplify-passwordless-react",
+  "version": "0.0.1",
   "dependencies": {
     "aws-amplify": "3.0.17",
     "react": "^16.12.0",

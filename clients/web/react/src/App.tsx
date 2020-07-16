@@ -8,28 +8,6 @@ import './App.css';
 import awsconfig from './aws-exports';
 
 Auth.configure(awsconfig);
-//
-// class MyCustomSignUp extends React.Component<ISignInProps, any> {
-//   gotoSignIn = () => {
-//     // to switch the authState to 'signIn'
-//     // @ts-ignore
-//     this.props.onStateChange('signIn', {});
-//   }
-//
-//   render() {
-//     return (
-//         <div>
-//           {/* only render this component when the authState is 'signUp' */}
-//           {this.props.authState === 'signUp' &&
-//           <div>
-//             My Custom SignUp Component
-//             <button onClick={this.gotoSignIn}>Goto SignIn</button>
-//           </div>
-//           }
-//         </div>
-//     );
-//   }
-// }
 
 const SignUp: React.FC<{}> = () => {
   const {handleSubmit, register, errors} = useForm<{ phoneNumber: string }>();
@@ -140,11 +118,11 @@ const SignIn: React.FC<{ setStatus: Function }> = ({setStatus}) => {
 const App: React.FC = () => {
   const [status, setStatus] = useState("offline");
   return (
-      <div>
+      <>
         <SignUp/>
         <SignIn setStatus={setStatus}/>
         {status === "signedIn" && "SignedIn"}
-      </div>
+      </>
   );
 }
 
