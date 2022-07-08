@@ -8,6 +8,7 @@ export const SignUp: React.FC<{}> = () => {
     try {
       const result = await Auth.signUp({
         username: phoneNumber,
+        // TODO: generate random password here
         password: "123456",
         attributes: {
           phone_number: phoneNumber
