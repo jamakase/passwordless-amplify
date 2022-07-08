@@ -1,21 +1,37 @@
 service: passwordless-example
 
 plugins:
-  - serverless-webpack
-
-custom:
-  webpack:
-    includeModules:
-      forceExclude:
-        - aws-sdk
+  - serverless-plugin-typescript
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs14.x
   stackName: ${self:service}-${self:provider.stage}
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'us-east-1'}
-  profile: mobcastServerless
   logs:
     restApi: true
   logRetentionInDays: 3
+
+functions:
+  createAuthChallenge:
+    handler: api/createAuthChallenge.handler
+    events:
+      - cognitoUserPool:
+          pool: UserPool
+          trigger: CreateAuthChallenge
+  defineAuthChallenge:
+    handler: api/defineAuthChallenge.handler
+    events:
+      - cognitoUserPool:
+          pool: UserPool
+          trigger: DefineAuthChallenge
+  verifyAuthChallenge:
+    handler: api/verifyAuthChallenge.handler
+    events:
+      - cognitoUserPool:
+          pool: UserPool
+          trigger: VerifyAuthChallengeResponse
+
+resources:
+  - ${file(./infra/user-stack.yaml)}

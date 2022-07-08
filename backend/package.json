@@ -1,24 +1,21 @@
 {
   "name": "passwordless-serverless",
   "version": "0.0.1",
-  "scripts": {
-  },
+  "scripts": {},
   "author": "Artem Astapenko",
   "dependencies": {
+    "crypto-secure-random-digit": "^1.0.10",
     "source-map-support": "^0.5.19"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.59",
     "@types/jest": "^26.0.4",
     "@types/node": "^14.0.23",
-    "aws-sdk": "^2.714.0",
-    "jest": "^26.1.0",
-    "serverless": "^1.75.1",
-    "serverless-webpack": "^5.3.2",
-    "ts-jest": "^26.1.2",
-    "ts-loader": "^8.0.1",
-    "typescript": "^3.9.7",
-    "webpack": "^4.43.0",
-    "webpack-node-externals": "^2.5.0"
+    "aws-sdk": "^2.1170.0",
+    "jest": "^28.1.2",
+    "serverless": "^3.19.0",
+    "serverless-plugin-typescript": "^2.1.2",
+    "ts-jest": "^28.0.5",
+    "typescript": "^4.7.4"
   }
 }
