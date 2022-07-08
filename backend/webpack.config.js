@@ -1,41 +1,41 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
-const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const slsw = require('serverless-webpack');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+
+const isLocal = slsw.lib.webpack.isLocal;
 
 module.exports = {
-  mode: slsw.lib.webpack.isLocal ? 'development' : 'production',
+  mode: isLocal ? 'development' : 'production',
   entry: slsw.lib.entries,
+  externals: [nodeExternals()],
   devtool: 'source-map',
   resolve: {
-    extensions: ['.json', '.ts'],
+    extensions: ['.js', '.jsx', '.json', '.ts', '.tsx']
   },
   output: {
-    libraryTarget: 'commonjs',
+    libraryTarget: 'commonjs2',
     path: path.join(__dirname, '.webpack'),
-    filename: '[name].js',
+    filename: '[name].js'
   },
   target: 'node',
-  externals: [nodeExternals()],
   module: {
     rules: [
-      // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
       {
-        test: /\.ts$/,
-        loader: 'ts-loader',
-        exclude: [
-          [
-            path.resolve(__dirname, 'node_modules'),
-            path.resolve(__dirname, '.serverless'),
-            path.resolve(__dirname, '.webpack'),
-          ],
-        ],
-        options: {
-          transpileOnly: true,
-        },
-      },
-    ],
+        // Include ts, tsx, js, and jsx files.
+        test: /\.(ts|js)x?$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'cache-loader',
+            options: {
+              cacheDirectory: path.resolve('.webpackCache')
+            }
+          },
+          'babel-loader'
+        ]
+      }
+    ]
   },
-  plugins: [new webpack.IgnorePlugin(/\/iconv-loader$/)],
+  plugins: [new ForkTsCheckerWebpackPlugin()]
 };

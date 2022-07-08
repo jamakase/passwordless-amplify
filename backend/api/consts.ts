@@ -1,0 +1,1 @@
+export const CHALLENGE_NAME: string = "CHALLENGE_NAME";
