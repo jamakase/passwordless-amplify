@@ -12,7 +12,7 @@ export const handler: CognitoUserPoolTriggerHandler = async event => {
     // Generate a new secret login code and mail it to the user
     secretLoginCode = randomDigits(6).join('');
 
-    await sendMessage(event.request.userAttributes.phoneNumber, secretLoginCode);
+    await sendMessage(event.request.userAttributes.phone_number, secretLoginCode);
 
   } else {
 
@@ -26,7 +26,7 @@ export const handler: CognitoUserPoolTriggerHandler = async event => {
 
   // This is sent back to the client app
   event.response.publicChallengeParameters = {
-    phoneNumber: event.request.userAttributes.phoneNumber
+    phoneNumber: event.request.userAttributes.phone_number
   };
 
   // Add the secret login code to the private challenge parameters

@@ -12,13 +12,21 @@ Auth.configure(awsconfig);
 
 type LoggedInState = "offline" | "signedIn"
 
+const AppLayout: React.FC<{}> = () => {
+  return (
+    <div>
+      Signed in
+    </div>
+  );
+};
+
 const App: React.FC = () => {
   const [status, setStatus] = useState<LoggedInState>("offline");
   return (
     <>
       <SignUp/>
-      <SignIn setStatus={setStatus}/>
-      {status === "signedIn" && "SignedIn"}
+      {/*<SignIn setStatus={setStatus}/>*/}
+      {status === "signedIn" && <AppLayout/>}
     </>
   );
 }

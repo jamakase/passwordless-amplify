@@ -3,9 +3,9 @@ Resources:
     Type: "AWS::Cognito::UserPool"
     Properties:
       AliasAttributes:
-        - email
-      AutoVerifiedAttributes:
-        - email
+        - phone_number
+#      AutoVerifiedAttributes:
+#        - email
       # DeviceConfiguration:
       #   ChallengeRequiredOnNewDevice: Boolean
       #   DeviceOnlyRememberedOnUserPrompt: Boolean
@@ -14,13 +14,17 @@ Resources:
       UserPoolName: passwordless-example
 
       Schema:
+#        - AttributeDataType: String
+#          Mutable: true
+#          Name: email
+#          StringAttributeConstraints:
+#            MaxLength: 1000
+#            MinLength: 0
+#          Required: false
         - AttributeDataType: String
           Mutable: true
-          Name: email
-          StringAttributeConstraints:
-            MaxLength: 1000
-            MinLength: 0
-          Required: false
+          Name: phone_number
+          Required: true
         - AttributeDataType: Number
           Mutable: true
           Name: confirmed
