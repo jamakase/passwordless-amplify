@@ -2,15 +2,16 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Auth } from "aws-amplify";
 import clsx from "clsx";
+import { Link } from "react-router-dom";
 
 export const SignUp: React.FC<{}> = () => {
-  const { handleSubmit, register, errors } = useForm<{ phoneNumber: string }>();
-  const onSubmit = async ({ phoneNumber }: { phoneNumber: string }) => {
+  const {handleSubmit, register, errors} = useForm<{ phoneNumber: string }>();
+  const onSubmit = async ({phoneNumber}: { phoneNumber: string }) => {
     try {
       const result = await Auth.signUp({
         username: phoneNumber,
         // TODO: generate random password here
-        password: "123456",
+        password: "!aA12345678",
         attributes: {
           phone_number: phoneNumber
         }
@@ -39,6 +40,7 @@ export const SignUp: React.FC<{}> = () => {
         {errors.phoneNumber && errors.phoneNumber.message}
         <button className="text-white bg-blue-600 hover:bg-blue-700 rounded-full py-2" type="submit">Submit</button>
       </form>
+      <Link to="/login">Have an account? Login </Link>
       {/*<div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">*/}
       {/*  <div className="md:flex">*/}
       {/*    <div className="md:shrink-0">*/}

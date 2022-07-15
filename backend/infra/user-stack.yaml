@@ -2,8 +2,8 @@ Resources:
   UserPool:
     Type: "AWS::Cognito::UserPool"
     Properties:
-      AliasAttributes:
-        - phone_number
+#      AliasAttributes:
+#        - phone_number
 #      AutoVerifiedAttributes:
 #        - email
       # DeviceConfiguration:
@@ -12,15 +12,11 @@ Resources:
       EmailVerificationMessage: Your verification code is {####}.
       EmailVerificationSubject: Your verification code
       UserPoolName: passwordless-example
+      UsernameAttributes:
+        - phone_number
+      LambdaConfig:
 
       Schema:
-#        - AttributeDataType: String
-#          Mutable: true
-#          Name: email
-#          StringAttributeConstraints:
-#            MaxLength: 1000
-#            MinLength: 0
-#          Required: false
         - AttributeDataType: String
           Mutable: true
           Name: phone_number

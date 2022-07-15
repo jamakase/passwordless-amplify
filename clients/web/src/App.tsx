@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { Auth } from 'aws-amplify';
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import './App.css';
 
@@ -12,22 +13,21 @@ Auth.configure(awsconfig);
 
 type LoggedInState = "offline" | "signedIn"
 
-const AppLayout: React.FC<{}> = () => {
+const Routing: React.FC<{}> = () => {
   return (
-    <div>
-      Signed in
-    </div>
+    <Routes>
+      <Route path="signup" element={<SignUp/>}/>
+      <Route path="login" element={<SignIn/>}/>
+      <Route path="/" element={<Navigate to={"login"}/>}/>
+    </Routes>
   );
 };
 
 const App: React.FC = () => {
-  const [status, setStatus] = useState<LoggedInState>("offline");
   return (
-    <>
-      <SignUp/>
-      {/*<SignIn setStatus={setStatus}/>*/}
-      {status === "signedIn" && <AppLayout/>}
-    </>
+    <BrowserRouter>
+      <Routing/>
+    </BrowserRouter>
   );
 }
 

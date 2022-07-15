@@ -18,20 +18,23 @@ functions:
     handler: api/createAuthChallenge.handler
     events:
       - cognitoUserPool:
-          pool: UserPool
+          pool: passwordless-example
           trigger: CreateAuthChallenge
+          existing: true
   defineAuthChallenge:
     handler: api/defineAuthChallenge.handler
     events:
       - cognitoUserPool:
-          pool: UserPool
+          pool: passwordless-example
           trigger: DefineAuthChallenge
+          existing: true
   verifyAuthChallenge:
     handler: api/verifyAuthChallenge.handler
     events:
       - cognitoUserPool:
-          pool: UserPool
+          pool: passwordless-example
           trigger: VerifyAuthChallengeResponse
+          existing: true
 
 resources:
   - ${file(./infra/user-stack.yaml)}
